@@ -91,8 +91,17 @@ class Country(UUIDMixin, CreatedMixin, ModifiedMixin):
     """Module for country."""
     
     name = models.TextField(_('name'), null=False, blank=False)
-    population = models.PositiveIntegerField(_('population'), null=True, blank=True, validators=[check_positive])
-    area_country = models.PositiveIntegerField(_('area country'), null=False, blank=False, default=0)
+    population = models.PositiveIntegerField(
+        _('population'),
+        null=True,
+        blank=True,
+        validators=[check_positive])
+    area_country = models.PositiveIntegerField(
+        _('area country'),
+        null=False,
+        blank=False, 
+        default=0
+    )
     hymn = models.TextField(_('hymn'), null=True, blank=True)
     objects = CountryManager()
 
@@ -112,7 +121,10 @@ class Feast(UUIDMixin, CreatedMixin, ModifiedMixin):
     date_of_feast = models.DateField(_('date of feast'), null=True, blank=True)
     description = models.TextField(_('description'), null=True, blank=True)
 
-    countries = models.ManyToManyField(Country, through='CountryToFeast', verbose_name=_('countries'))
+    countries = models.ManyToManyField(
+        Country, 
+        through='CountryToFeast', 
+        verbose_name=_('countries'))
 
     def __str__(self) -> str:
         return self.title
@@ -125,7 +137,12 @@ class Feast(UUIDMixin, CreatedMixin, ModifiedMixin):
 class City(UUIDMixin, CreatedMixin, ModifiedMixin):
     """Module for city."""
 
-    country = models.ForeignKey(Country, null=True, on_delete=models.CASCADE, verbose_name=_('country'))
+    country = models.ForeignKey(
+        Country, 
+        null=True, 
+        on_delete=models.CASCADE, 
+        verbose_name=_('country')
+    )
     name = models.TextField(_('name'), null=False, blank=False)
     population = models.PositiveIntegerField(_('population'), null=True, blank=True)
     coordinates = models.TextField(_('coordinates'), null=True, blank=True)
@@ -163,7 +180,11 @@ class Client(CreatedMixin, ModifiedMixin):
         AUTH_USER_MODEL,
         on_delete=models.CASCADE, primary_key=True,
     )
-    countries = models.ManyToManyField(Country, through='CountryClient', verbose_name=_('countries'))
+    countries = models.ManyToManyField(
+        Country, 
+        through='CountryClient', 
+        verbose_name=_('countries')
+    )
     
     def save(self, *args, **kwargs) -> None:
         check_created(self.created)

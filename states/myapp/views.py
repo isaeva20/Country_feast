@@ -35,11 +35,13 @@ def create_listview(model_class, plural_name, template):
     
     Parameters:
         model_class (type): The Django model class for which to create the ListView.
-        plural_name (type): The name of the model class in plural form, used as the context variable name.
+        plural_name (type): The name of the model class in plural form,
+        used as the context variable name.
         template (type): The path to the HTML template to use for rendering the list view.
     
     Returns: 
-        CustomListView: A subclass of Django's ListView, configured for the specified model class.
+        CustomListView: A subclass of Django's ListView,
+          configured for the specified model class.
     """
     class CustomListView(mixins.LoginRequiredMixin, ListView):
         model = model_class
@@ -62,17 +64,21 @@ def create_view(model, model_name, template, redirect_page):
     Creates a view function for displaying a single instance of a model.
     
     This decorator-based view function retrieves a single instance of the specified model
-    based on its ID from the GET parameters. If the ID is not provided or the instance does
+    based on its ID from the GET parameters.
+      If the ID is not provided or the instance does
     not exist, it redirects to the specified redirect page.
     
     Parameters:
         model (type): The Django model class for which to create the view.
-        model_name (type): The name of the model class, used as the context variable name.
+        model_name (type): The name of the model class,
+        used as the context variable name.
         template (type): The path to the HTML template to use for rendering the view.
-        redirect_page (type): The URL pattern name or callable to redirect to if the ID is not provided or the instance does not exist.
+        redirect_page (type): The URL pattern name or callable to redirect
+        to if the ID is not provided or the instance does not exist.
     
     Returns:
-        view: A view function that handles GET requests for a single instance of the specified model.
+        view: A view function that handles GET requests
+        for a single instance of the specified model.
     """
     @decorators.login_required
     def view(request):
@@ -114,7 +120,8 @@ def register(request):
         request (HttpRequest): The HTTP request object.
     
     Returns:
-        HttpResponse: An HTTP response object, either redirecting to the homepage upon successful registration
+        HttpResponse: An HTTP response object, 
+        either redirecting to the homepage upon successful registration
                     or rendering the registration form.
     """
     if request.method == 'POST':
@@ -136,11 +143,13 @@ class MyPermission(permissions.BasePermission):
     Custom permission class for checking user permissions.
     
     This class checks if the authenticated user is allowed to perform certain actions
-    based on the HTTP method of the request. Users must be authenticated for GET, OPTIONS, and HEAD methods,
+    based on the HTTP method of the request. 
+    Users must be authenticated for GET, OPTIONS, and HEAD methods,
     and must also be superusers for POST, DELETE, and PUT methods.
     
     Methods:
-        has_permission(self, request, _): Checks if the current user has permission to access the requested resource.
+        has_permission(self, request, _): Checks if the current user has permission 
+        to access the requested resource.
     """
     def has_permission(self, request, _):
         if request.method in ('GET', 'OPTIONS', 'HEAD'):
@@ -155,8 +164,10 @@ def profile(request):
     """
     Displays the user's profile.
     
-    This view checks if the current user is a superuser. If not, it fetches the associated Client
-    instance and prepares data for display. If the user is a superuser, a special message is prepared instead.
+    This view checks if the current user is a superuser. 
+    If not, it fetches the associated Client
+    instance and prepares data for display. 
+    If the user is a superuser, a special message is prepared instead.
     
     Parameters:
         request (HttpRequest): The HTTP request object.
