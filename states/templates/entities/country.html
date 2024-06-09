@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Country page</h1>
+
+    {% if country %}
+    <ul>
+
+      <li>
+        <a>{{ country.name }}</a>
+      </li>
+    </ul>
+
+    {% else %}
+      <p>Country not found..</p>
+    {% endif %}
+{% endblock %}

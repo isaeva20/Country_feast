@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Feast page</h1>
+
+    {% if feast %}
+      <ul>
+
+        <li>
+          <a>Title: {{ feast.title }}</a><br>
+          <a>Date_of_feast: {{ feast.date_of_feast }}</a><br>
+          <a>Description: {{ feast.description }}</a><br>
+        </li>
+      </ul>
+
+    {% else %}
+      <p>Feast not found..</p>
+    {% endif %}
+{% endblock %}

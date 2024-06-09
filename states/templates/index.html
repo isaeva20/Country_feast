@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>Local Repository Of States </h1>
+
+  <p>Welcome to <em>Local repository of States</em></p>
+
+<h2>Dynamic content</h2>
+
+  <p>Our repository has the following record counts:</p>
+  <ul>
+    <li><strong>Countries:</strong> {{ countries }}</li>
+    <li><strong>Feasts:</strong> {{ feasts }}</li>
+    <li><strong>Cities:</strong> {{ cities }}</li>
+  </ul>
+
+{% endblock %}

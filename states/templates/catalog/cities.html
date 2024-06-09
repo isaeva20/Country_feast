@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Cities</h1>
+
+    {% if cities_list %}
+    <ul>
+
+        {% for city in cities_list %}
+        <li>
+            <a href="{% url 'city'%}?id={{city.id}}">{{ city.name }}</a> {{ city.population }} {{ city.coordinates }} {{ city.area_city }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p>There are no city for now..</p>
+    {% endif %}
+{% endblock %}

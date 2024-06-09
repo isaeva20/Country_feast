@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>City page</h1>
+
+    {% if city %}
+    <ul>
+
+      <li>
+        <a>{{ city.name }}</a> 
+      </li>
+    </ul>
+
+    {% else %}
+      <p>City not found..</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Countries</h1>
+
+    {% if countries_list %}
+    <ul>
+
+        {% for country in countries_list %}
+        <li>
+            <a href="{% url 'country'%}?id={{country.id}}">{{ country.name }} </a>{{ country.population }} {{ country.area_country }} {{ country.hymn }}
+        </li>
+        {% endfor %} 
+    </ul>
+
+    {% else %}
+        <p>There are no country for now..</p>
+    {% endif %} 
+{% endblock %}

@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-19 17:03+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: models.py:19 models.py:25
+msgid "Datetime is bigger than current datetime!"
+msgstr ""
+
+#: models.py:31
+msgid "created"
+msgstr ""
+
+#: models.py:44
+msgid "modified"
+msgstr ""
+
+#: models.py:56 models.py:87
+msgid "name"
+msgstr ""
+
+#: models.py:57 models.py:88
+msgid "population"
+msgstr ""
+
+#: models.py:58
+msgid "area_country"
+msgstr ""
+
+#: models.py:59
+msgid "hymn"
+msgstr ""
+
+#: models.py:67 models.py:86 models.py:101
+msgid "country"
+msgstr ""
+
+#: models.py:68 models.py:75
+msgid "countries"
+msgstr ""
+
+#: models.py:71
+msgid "title"
+msgstr ""
+
+#: models.py:72
+msgid "date_of_feast"
+msgstr ""
+
+#: models.py:73
+msgid "description"
+msgstr ""
+
+#: models.py:82 models.py:102
+msgid "feast"
+msgstr ""
+
+#: models.py:83
+msgid "feasts"
+msgstr ""
+
+#: models.py:89
+msgid "coordinates"
+msgstr ""
+
+#: models.py:90
+msgid "area_city"
+msgstr ""
+
+#: models.py:97
+msgid "city"
+msgstr ""
+
+#: models.py:98
+msgid "cities"
+msgstr ""
+
+#: models.py:112
+msgid "Relationship country feast"
+msgstr ""
+
+#: models.py:113
+msgid "Relationships country feast"
+msgstr ""

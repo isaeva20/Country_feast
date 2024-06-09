@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-19 17:03+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: models.py:19 models.py:25
+msgid "Datetime is bigger than current datetime!"
+msgstr "Дата и время больше текущих даты и времени"
+
+#: models.py:31
+msgid "created"
+msgstr "создано"
+
+#: models.py:44
+msgid "modified"
+msgstr "изменено"
+
+#: models.py:56 models.py:87
+msgid "name"
+msgstr "название"
+
+#: models.py:57 models.py:88
+msgid "population"
+msgstr "население"
+
+#: models.py:58
+msgid "area country"
+msgstr "площадь страны"
+
+#: models.py:59
+msgid "hymn"
+msgstr "гимн"
+
+#: models.py:67 models.py:86 models.py:101
+msgid "country"
+msgstr "страна"
+
+#: models.py:68 models.py:75
+msgid "countries"
+msgstr "страны"
+
+#: models.py:71
+msgid "title"
+msgstr "название"
+
+#: models.py:72
+msgid "date of feast"
+msgstr "дата праздника"
+
+#: models.py:73
+msgid "description"
+msgstr "описание"
+
+#: models.py:82 models.py:102
+msgid "feast"
+msgstr "праздник"
+
+#: models.py:83
+msgid "feasts"
+msgstr "праздники"
+
+#: models.py:89
+msgid "coordinates"
+msgstr "координаты"
+
+#: models.py:90
+msgid "area city"
+msgstr "площадь города"
+
+#: models.py:97
+msgid "city"
+msgstr "город"
+
+#: models.py:98
+msgid "cities"
+msgstr "города"
+
+#: models.py:112
+msgid "Relationship country feast"
+msgstr "связь страна праздник"
+
+#: models.py:113
+msgid "Relationships country feast"
+msgstr "связи страна праздник"

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Feasts</h1>
+
+    {% if feasts_list %}
+    <ul>
+
+        {% for feast in feasts_list %}
+        <li>
+            <a href="{% url 'feast' %}?id={{feast.id}}">{{ feast.title }}</a> {{ feast.date_of_feast }} ({{ feast.description }})
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p>There are no feast for now..</p>
+    {% endif %}
+{% endblock %}
