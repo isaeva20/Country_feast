@@ -5,4 +5,4 @@ export PG_PORT=5432
 export PG_USER=test
 export PG_PASSWORD=test
 export PG_DBNAME=postgres
-python3 manage.py test $1
+python3 states/manage.py test $1
