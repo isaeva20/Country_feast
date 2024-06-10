@@ -26,10 +26,10 @@ jobs:
         pip install -r states/tests/requirements.txt
         chmod +x states/tests/test.sh
     - name: Test views
-      run: states/tests/test.sh states/tests.test_views
+      run: python manage.py test states.tests.test_views
     - name: Test models
-      run: states/tests/test.sh states.tests.test_models
+      run: states/tests/test.sh tests.test_models
     - name: Test api
-      run: states/tests/test.sh states.tests.test_api
+      run: states/tests/test.sh tests.test_api
     - name: Test forms
-      run: states/tests/test.sh states.tests.test_forms
+      run: states/tests/test.sh tests.test_forms
