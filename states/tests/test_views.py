@@ -1,12 +1,22 @@
+"""Modeule for views test."""
+
 from django.test import TestCase
 from django.test.client import Client as TestClient
 from django.urls import reverse
 from django.contrib.auth.models import User
-from myapp.models import Country, Feast, City, Client
 from rest_framework import status
+from myapp.models import Country, Feast, City, Client
 
 def create_method_with_auth(url, page_name, template, login=False):
+    """
+    Creates a test method that makes authenticated GET 
+    requests to specified URLs and verifies the response.
+    """
     def method(self):
+        """
+        Performs authenticated GET requests
+        to specified URLs and verifies the response.
+        """
         self.client = TestClient()
         if login:
             user = User.objects.create(username='user', password='user')
@@ -22,30 +32,40 @@ def create_method_with_auth(url, page_name, template, login=False):
     return method
 
 def create_method_no_auth(url):
+    """
+    Creates a test method that sends an unauthenticated GET
+    request to a specified URL and verifies the response.
+    """
     def method(self):
+        """
+        Sends an unauthenticated GET request
+        to a specified URL and verifies the response.
+        """
         self.client = TestClient()
         self.assertEqual(self.client.get(url).status_code, status.HTTP_302_FOUND)
     return method
 
 def create_method_instance(url, page_name, template, model, creation_attrs):
+    """
+    Generates a test method that sets up a TestClient,
+    creates a user and client, and interacts with a specified model.
+    """
     def method(self):
+        """
+        Initializes a TestClient, creates a user,
+        and associates a client with that user.
+        """
         self.client = TestClient()
         user = User.objects.create(username='user', password='user')
         Client.objects.create(user=user)
 
-        # GET without auth
         self.assertEqual(self.client.get(url).status_code, status.HTTP_302_FOUND)
-        # login for client, test with auth below
         self.client.force_login(user=user)
-        # GET without id
         self.assertEqual(self.client.get(url).status_code, status.HTTP_302_FOUND)
-        # GET with invalid id
         self.assertEqual(self.client.get(f'{url}?id=123').status_code, status.HTTP_302_FOUND)
-        # creating model object for using in url
         created_id = model.objects.create(**creation_attrs).id
         created_url = f'{url}?id={created_id}'
         created_reversed_url = f'{reverse(page_name)}?id={created_id}'
-        # GET with valid id
         response = self.client.get(created_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTemplateUsed(response, template)
@@ -54,7 +74,12 @@ def create_method_instance(url, page_name, template, model, creation_attrs):
     return method
 
 instance_pages = (
-    ('/country/', 'country', 'entities/country.html', Country, {'name': 'adaaw', 'area_country': 1013022}),
+    (
+        '/country/',
+        'country',
+        'entities/country.html',
+        Country, {'name': 'adaaw', 'area_country': 1013022}
+    ),
     ('/feast/', 'feast', 'entities/feast.html', Feast, {'title': 'dadqwd'}),
     ('/city/', 'city', 'entities/city.html', City, {'name': 'fsfsf'}),
 )
@@ -72,15 +97,19 @@ casual_pages = (
     ('/accounts/login/', 'login', 'registration/login.html'),
 )
 
-methods_with_auth = {f'test_{page[1]}': create_method_with_auth(*page, login=True) for page in pages}
+methods_with_auth = {f'test_{page[1]}':
+                    create_method_with_auth(*page, login=True) for page in pages}
 TestWithAuth = type('TestWithAuth', (TestCase,), methods_with_auth)
 
-casual_methods = {f'test_with_auth_{page[1]}': create_method_with_auth(*page, login=True) for page in casual_pages}
-casual_methods.update({f'test_no_auth_{page[1]}': create_method_with_auth(*page, login=False) for page in casual_pages})
+casual_methods = {f'test_with_auth_{page[1]}':
+                create_method_with_auth(*page, login=True) for page in casual_pages}
+casual_methods.update({f'test_no_auth_{page[1]}':
+                    create_method_with_auth(*page, login=False) for page in casual_pages})
 TestCasualPage = type('TestCasualPages', (TestCase,), casual_methods)
 
 methods_no_auth = {f'test_{url}': create_method_no_auth(url) for url, _, _ in pages}
 TestNoAuth = type('TestNoAuth', (TestCase,), methods_no_auth)
 
-methods_intance = {f'test_{page[1]}': create_method_instance(*page) for page in instance_pages}
+methods_intance = {f'test_{page[1]}':
+                   create_method_instance(*page) for page in instance_pages}
 TestInstancePages = type('TestInstancePages', (TestCase,), methods_intance)

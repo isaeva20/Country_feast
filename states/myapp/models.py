@@ -228,6 +228,11 @@ class Client(CreatedMixin, ModifiedMixin):
         check_created(self.created)
         check_modified(self.modified)
         return super().save(*args, **kwargs)
+    
+    def __str__(self) -> str:
+        """Returns a string representation of the object."""
+
+        return f'{self.user.username} ({self.user.first_name} {self.user.last_name})'
 
     class Meta:
         """Inner class metadata for abstract base classes."""
