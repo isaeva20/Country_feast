@@ -1,6 +1,7 @@
+"""Module for admin."""
+
 from django.contrib import admin
 from .models import Country, Feast, City, Client, CountryToFeast, CountryClient
-
 
 class CountryFeastInline(admin.TabularInline):
     """Inline for CountryFeast model."""

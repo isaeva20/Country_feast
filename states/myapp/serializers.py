@@ -1,6 +1,7 @@
+"""Module for serializers."""
+
 from rest_framework.serializers import HyperlinkedModelSerializer
 from .models import Country, Feast, City
-
 
 class CountrySerializer(HyperlinkedModelSerializer):
     """Serializer for the Country model."""
@@ -28,4 +29,3 @@ class CitySerializer(HyperlinkedModelSerializer):
 
         model = City
         fields = '__all__'
-

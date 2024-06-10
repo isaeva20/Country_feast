@@ -5,7 +5,6 @@ from rest_framework import viewsets, permissions, authentication
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.core import paginator as django_paginator, exceptions
-from rest_framework import viewsets, permissions, authentication
 from django.contrib.auth import decorators, mixins
 from .models import Country, Feast, City, Client
 from .serializers import CountrySerializer, FeastSerializer, CitySerializer
@@ -27,29 +26,29 @@ def home_page(request):
 
 def create_listview(model_class, plural_name, template):
     """
-    Creates a custom ListView for a given model class, using pagination.
-    
-    This function dynamically creates a ListView subclass that displays a paginated list
-    of instances of the specified model class. It uses Django's built-in Paginator
-    to handle pagination logic.
-    
-    Parameters:
-        model_class (type): The Django model class for which to create the ListView.
-        plural_name (type): The name of the model class in plural form,
-        used as the context variable name.
-        template (type): The path to the HTML template to use for rendering the list view.
-    
-    Returns: 
-        CustomListView: A subclass of Django's ListView,
-          configured for the specified model class.
+    Creates a custom ListView for Django with pagination and login requirement.
+
+    Args:
+        model_class (type): The model class to be displayed in the view.
+        plural_name (str): The plural name used in the template context.
+        template (str): The template name to render the view.
+        
+    Returns:
+        CustomListView: A subclass of Django's ListView with customizations.
     """
     class CustomListView(mixins.LoginRequiredMixin, ListView):
+        """A custom Django ListView with login requirement, pagination, and dynamic context data."""
+
         model = model_class
         template_name = template
         paginate_by = 10
         context_object_name = plural_name
 
         def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+            """
+            Overrides the get_context_data method to include paginated
+            model instances in the context.
+            """
             context = super().get_context_data(**kwargs)
             instances = model_class.objects.all()
             paginator = django_paginator.Paginator(instances, 10)
@@ -82,6 +81,7 @@ def create_view(model, model_name, template, redirect_page):
     """
     @decorators.login_required
     def view(request):
+        """Renders a detail view for a specific model instance identified by an ID."""
         id_ = request.GET.get('id', None)
         if not id_:
             return redirect(redirect_page)
@@ -152,12 +152,15 @@ class MyPermission(permissions.BasePermission):
         to access the requested resource.
     """
     def has_permission(self, request, _):
+        """ 
+        Checks if the request should be granted permission
+        based on the request method and user roles.
+        """
         if request.method in ('GET', 'OPTIONS', 'HEAD'):
             return bool(request.user and request.user.is_authenticated)
         elif request.method in ('POST', 'DELETE', 'PUT'):
             return bool(request.user and request.user.is_superuser)
         return False
-    
 
 @decorators.login_required
 def profile(request):
@@ -190,6 +193,8 @@ def profile(request):
     )
 
 class CountryViewSet(viewsets.ModelViewSet):
+    """A ViewSet for managing country resources."""
+
     serializer_class = CountrySerializer
     queryset = Country.objects.all()
     authentication_classes = [authentication.TokenAuthentication]
@@ -197,16 +202,17 @@ class CountryViewSet(viewsets.ModelViewSet):
 
 
 class FeastViewSet(viewsets.ModelViewSet):
+    """A ViewSet for managing country resources."""
+
     serializer_class = FeastSerializer
     queryset = Feast.objects.all()
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [MyPermission]
 
 class CityViewSet(viewsets.ModelViewSet):
+    """A ViewSet for managing country resources."""
+
     serializer_class = CitySerializer
     queryset = City.objects.all()
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [MyPermission]
-
-
-
