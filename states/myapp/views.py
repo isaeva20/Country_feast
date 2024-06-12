@@ -91,12 +91,30 @@ def create_view(model, model_name, template, redirect_page):
             return redirect(redirect_page)
         if not target:
             return redirect_page(redirect_page)
-        context = {model_name: target}
-        return render(
-            request,
-            template,
-            context,
-        )
+        if model_name == 'country':
+            cities = City.objects.filter(country=target)
+            feasts = Feast.objects.filter(countries=target)
+            context = {model_name: target, 'cities': cities, 'feasts': feasts}
+            return render(
+                request,
+                template,
+                context,
+            )
+        if model_name == 'feast':
+            countries = Country.objects.filter(feast=target)
+            context = {model_name: target, 'countries': countries}
+            return render(
+                request,
+                template,
+                context,
+            )
+        else:
+            context = {model_name: target}
+            return render(
+                request,
+                template,
+                context,
+            )
     return view
 
 view_country = create_view(Country, 'country', 'entities/country.html', 'countries')

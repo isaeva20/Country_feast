@@ -1,17 +1,26 @@
-{% extends "base_generic.html" %}
-
 {% block content %}
-    <h1>Country page</h1>
-
     {% if country %}
-    <ul>
-
-      <li>
-        <a>{{ country.name }}</a>
-      </li>
-    </ul>
-
+        <h1>Country Page</h1>
+        <div>
+            <h2>Country: {{ country.name }}</h2>
+            <h3>Feasts:</h3>
+            <ul>
+                {% for feast in feasts %}
+                  <li><a href="{% url 'feast'%}?id={{feast.id}}">{{ feast.title }}</a></li>
+                {% empty %}
+                  <li>No feasts found for this country.</li>
+                {% endfor %}
+            </ul>
+            <h3>Cities:</h3>
+            <ul>
+                {% for city in cities %}
+                    <li><a href="{% url 'city'%}?id={{city.id}}">{{ city.name }}</a></li>
+                {% empty %}
+                    <li>No cities found for this country.</li>
+                {% endfor %}
+            </ul>
+        </div>
     {% else %}
-      <p>Country not found..</p>
+        <p>Country not found..</p>
     {% endif %}
 {% endblock %}
