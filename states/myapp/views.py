@@ -196,19 +196,21 @@ def profile(request):
     Returns:
         HttpResponse: An HTTP response object, rendering the user's profile page.
     """
-    if not request.user.is_superuser:
+    if request.user.is_superuser:
+        client_data = {'Role': 'You are superuser!'}
+    else:
         client = Client.objects.get(user=request.user)
         attrs = 'user'
         client_data = {getattr(client, attrs)}
-    else:
-        client_data = {'You is superuser'}
+
     return render(
         request,
         'pages/profile.html',
         {
             'client_data': client_data,
-        }
+        },
     )
+
 
 class CountryViewSet(viewsets.ModelViewSet):
     """A ViewSet for managing country resources."""
